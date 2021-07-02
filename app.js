@@ -17,5 +17,5 @@ app.use('/api/people',people)
 app.use('/login',auth)
 
 app.listen(port, () => {
-    console.log(`server is listening on port ${port}`);
+    console.log(`The server is listening on port ${port}`);
 });
