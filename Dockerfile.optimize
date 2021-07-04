@@ -1,0 +1,23 @@
+FROM node:14-alpine AS builder
+
+COPY . /usr/src/app 
+
+WORKDIR /usr/src/app
+
+RUN npm install
+
+FROM node:14-alpine
+
+WORKDIR /app
+
+COPY --from=builder /usr/src/app /app
+
+EXPOSE 5000
+
+RUN rm package-lock.json package.json && \
+    addgroup -S appgroup && adduser -S appuser -G appgroup 
+
+USER appuser
+
+CMD ["node","app.js"]
+
